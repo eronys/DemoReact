@@ -7,6 +7,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import axios from 'axios';
 import FlashMessage from "react-native-flash-message";
 import { showMessage, hideMessage } from "react-native-flash-message";
+import { StyleProvider } from 'native-base';
 
 export default function Crud({route,navigation}){
 
@@ -50,6 +51,7 @@ export default function Crud({route,navigation}){
                 type: "success",
               });
           console.log(response);
+          navigation.navigate('Home');          
         })
         .catch(function (error) {
             showMessage({
@@ -57,6 +59,7 @@ export default function Crud({route,navigation}){
                 type: "info",
               });
           console.log(error);
+          navigation.navigate('Home');          
         });
     }
 
@@ -72,6 +75,7 @@ export default function Crud({route,navigation}){
                 type: "success",
               });
           console.log(response);
+          navigation.navigate('Home');                    
         })
         .catch(function (error) {
             showMessage({
@@ -95,6 +99,7 @@ export default function Crud({route,navigation}){
                 type: "success",
               });
           console.log(response);
+          navigation.navigate('Home');                    
         })
         .catch(function (error) {
             showMessage({
@@ -111,24 +116,31 @@ export default function Crud({route,navigation}){
             <Header
         leftComponent={
             <Button  
-            title="< Voltar"
+            title="Voltar"
             onPress={()=>navigation.navigate('Home')}
             ></Button>}
-            centerComponent={{ text: 'Cadastro de Clientes', style: { color: '#fff' } }}
+            backgroundColor="#191970"
+            centerComponent={{ text: 'NOVO CLIENTE', style: { color: '#00BFFF', fontSize:20 } }}
         
         />
+
  <FlashMessage position="top" /> 
             <ScrollView >
 
             <Text style={styles.titulo}>Digite seu Nome</Text>
             <TextInput
+            placeholder='Nome completo'            
+            maxLength={30}
             style={{ height: 40,width:300, borderColor: 'gray', borderWidth: 1 }}
             onChangeText={text => setNome(text)}
             value={getNome}
             /> 
 
-            <Text style={styles.titulo}>Digite seu Cpf</Text>
+            <Text style={styles.titulo}>Digite seu CPF</Text>
             <TextInput
+            placeholder='apenas número'            
+            keyboardType="numeric"
+            maxLength={11}
             style={{ height: 40,width:300, borderColor: 'gray', borderWidth: 1 }}
             onChangeText={text => setCpf(text)}
             value={getCpf}
@@ -136,7 +148,10 @@ export default function Crud({route,navigation}){
 
             <Text style={styles.titulo}>Digite seu Telefone</Text>
             <TextInput
-            style={{ height: 40,width:300, borderColor: 'gray', borderWidth: 1 }}
+            placeholder='Apenas número'                        
+            keyboardType="numeric"                        
+            maxLength={11}
+            style={{ height: 40, width:300, borderColor: 'gray', borderWidth: 1 }}
             onChangeText={text => setTelefone(text)}
             value={getTelefone}
             />  
@@ -145,13 +160,20 @@ export default function Crud({route,navigation}){
             <Button style={{paddingTop:20}}
             title="Salvar"
             style={styles.botao}
+            linearGradientProps={{
+              colors: ['green','green', 'green'],
+              }}
+            style={styles.botao}
             onPress={() => inserirDados()}
             />    
             ):null}
 
             { getAlterar ? (
             <Button style={{paddingTop:20}}
-            title="Alterar"
+            title="Salvar"
+            linearGradientProps={{
+              colors: ['green','green', 'green'],
+              }}
             style={styles.botao}
             onPress={() => alterarDados()}
             />             

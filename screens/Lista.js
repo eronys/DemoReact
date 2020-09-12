@@ -26,7 +26,7 @@ export default function ListaScreen({route,navigation}){
   <View>
     <Header
             
-            centerComponent={{ text: 'Lista', style: { color: '#fff', fontSize:20 } }}
+            centerComponent={{ text: 'Lista', style: { color: '#fff', fontSize:50 } }}
             rightComponent={
                 <Button  
                 title="+"

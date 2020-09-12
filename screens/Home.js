@@ -27,33 +27,38 @@ return(
     <View>
   <Header
             
-            centerComponent={{ text: 'Lista', style: { color: '#fff', fontSize:20 } }}
+            centerComponent={{ text: 'CLIENTES', style: { color: '#00BFFF', fontSize:20 } }}
             rightComponent={
                 <Button  
-                title="+"
+                title="   +   "
                 onPress={()=>navigation.navigate('Crud')}
                 ></Button>}
+                backgroundColor="#191970"
    />
 
-       {
-    getdata.map((linha, i) => (
-      <ListItem
-        key={i}
-        leftAvatar={{ source: { uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg' } }}
-        title={linha.nome}
-        subtitle={linha.cpf}
-        bottomDivider
-        chevron
-        onPress={()=>navigation.navigate('Crud',{
-           nome:linha.nome,
-           telefone:linha.telefone,
-           cpf:linha.cpf,
-           id:linha.id,
-           alterar:true 
-        })}
-      />
-    ))
+<ScrollView >
+
+  {
+      getdata.map((linha, i) => (
+        <ListItem
+          key={i}
+          leftAvatar={{ source: { uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg' } }}
+          title={linha.nome}
+          subtitle={linha.cpf}
+          bottomDivider
+          chevron
+          onPress={()=>navigation.navigate('Crud',{
+            nome:linha.nome,
+            telefone:linha.telefone,
+            cpf:linha.cpf,
+            id:linha.id,
+            alterar:true 
+          })}
+        />
+      ))
   } 
+
+</ScrollView>
     </View>
 )
 

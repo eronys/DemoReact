@@ -37,7 +37,7 @@ export default function CadastroScreen({route,navigation}) {
                 title="+"
                 onPress={()=>navigation.navigate('Tela')}
                 ></Button>}
-/>
+    />
         <ScrollView>
         {
     getData.map((l, i) => (

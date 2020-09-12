@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput,TouchableHighlight ,StyleSheet} from 'react-native';
+import { View, Text, TextInput,TouchableHighlight ,StyleSheet, YellowBox} from 'react-native';
 import axios from 'axios';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -7,7 +7,6 @@ import { ListItem,Header, Button,Image} from 'react-native-elements'
 import { ScrollView } from 'react-native-gesture-handler';
 import FlashMessage from "react-native-flash-message"; 
 import {showMessage, hideMessage } from "react-native-flash-message";
-
 
 export default function ListaScreen({route,navigation}){
 
@@ -48,8 +47,9 @@ async function inserirDados(){
         showMessage({
             message: "Registro Cadastrado com sucesso",
             type: "success",
-          }); 
+          });           
         console.log(response);
+        navigation.navigate('Home');          
       })
       .catch(function (error) {
         console.log(error);
@@ -72,6 +72,7 @@ function alterarDados(){
             type: "success",
           }); 
         console.log(response);
+        navigation.navigate('Home');        
       })
       .catch(function (error) {
         console.log(error);
@@ -101,6 +102,7 @@ function excluirDados(){
                   type: "danger",
                 }); 
               console.log(response);
+              navigation.navigate('Home');          
             })
             .catch(function (error) {
               console.log(error);
@@ -123,8 +125,7 @@ return (
             title="< Voltar"
             onPress={()=>navigation.navigate('Listar')}
             ></Button>}
-            centerComponent={{ text: 'Cadastro de Clientes', style: { color: '#fff' } }}
-        
+            centerComponent={{ text: 'Cadastro de Clientes', style: { color: '#fff' } }}        
         />
         <ScrollView>
 
@@ -133,24 +134,31 @@ return (
                 source={{ uri: 'https://pngimage.net/wp-content/uploads/2018/05/cadastro-icon-png-3.png' }}
                 style={{ width: 200, height: 200 }}
              />
-
-
+        
             <Text style={styles.titulo}>Digite seu Nome</Text>
             <TextInput
-            style={{ height: 40,width:300, borderColor: 'gray', borderWidth: 1 }}
+            placeholder='Nome completo'            
+             maxLength={30}
+            style={{ height: 40,width:300 , borderColor: 'gray', borderWidth: 1 }}
             onChangeText={text => setNome(text)}
             value={getNome}
             />    
 
-            <Text style={styles.titulo}>Digite seu Cpf</Text>
+            <Text style={styles.titulo}>Digite seu CPF</Text>
             <TextInput
+            placeholder='Apenas número'                        
+            keyboardType="numeric"                        
+             maxLength={11}            
             style={{ height: 40,width:300, borderColor: 'gray', borderWidth: 1 }}
             onChangeText={text => setCpf(text)}
-            value={getCpf}
+            value={getCpf}            
             /> 
 
             <Text style={styles.titulo}>Digite seu Telefone</Text>
             <TextInput
+            placeholder='Apenas número'                        
+            keyboardType="numeric"                        
+             maxLength={11}                        
             style={{ height: 40,width:300, borderColor: 'gray', borderWidth: 1 }}
             onChangeText={text => setTelefone(text)}
             value={getTelefone}
@@ -159,6 +167,7 @@ return (
             { !getAlterar ? (
             <Button style={{paddingTop:20}}
             title="Salvar"
+            color="yellow"
             style={styles.botao}
             onPress={() => inserirDados()}
             />
@@ -167,6 +176,7 @@ return (
             { getAlterar ? (
             <Button style={{paddingTop:20}}
             title="Alterar"
+            color="yellow"            
             style={styles.botao}
             onPress={() => alterarDados()}
             />
@@ -175,7 +185,6 @@ return (
             { getAlterar ? (
             <Button style={{paddingTop:20}}
             title="Excluir"
-            color="red"
             linearGradientProps={{
                 colors: ['red','red', 'red'],
                 }}
